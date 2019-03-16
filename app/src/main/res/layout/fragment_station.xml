@@ -16,7 +16,7 @@
             <TextView
                 android:layout_width="0px"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="6"
                 android:gravity="center"
                 android:textSize="100px"
                 android:textColor="@color/textHighLightColor"
@@ -26,7 +26,7 @@
             <TextView
                 android:layout_width="0px"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="4"/>
         </LinearLayout>
     </FrameLayout>
 
@@ -46,11 +46,11 @@
                 android:layout_width="0px"
                 android:textColor="@color/textHighLightColor"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="4"/>
             <TextView
                 android:layout_width="0px"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="6"
                 android:gravity="center"
                 android:textSize="100px"
                 android:textColor="@color/textHighLightColor"

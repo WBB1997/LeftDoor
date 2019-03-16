@@ -196,8 +196,10 @@ public class MainActivity extends AppCompatActivity {
     // 设置站点显示状态
     private void setStationFragment() {
         int size = RouteArrayList.get(CurrentDrivingRoadIDNum).size();
-        if(NextStationIDNumb < 0 || NextStationIDNumb >= size)
+        if(NextStationIDNumb < 0 || NextStationIDNumb >= size) {
+            stationFragment = StationFragment.newInstance(null, null);
             return;
+        }
         if(stationFragment != null) {
             if (NextStationIDNumb == size - 1)
                 stationFragment.setStation(RouteArrayList.get(CurrentDrivingRoadIDNum).get(NextStationIDNumb).first, RouteArrayList.get(CurrentDrivingRoadIDNum).get(0).first);
