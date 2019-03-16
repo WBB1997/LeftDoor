@@ -1,64 +1,72 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <LinearLayout
-        android:id="@+id/text"
+    android:layout_height="match_parent">
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:paddingTop="10dp"
-        android:paddingLeft="67dp"
-        android:paddingRight="67dp"
-        android:paddingBottom="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/firstStation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="start"
-            android:textSize="40px"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/lastStation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:textSize="40px"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:paddingLeft="67dp"
-        android:paddingRight="67dp"
-        android:layout_weight="1"
-        android:background="@color/colorPrimaryDark">
-        <com.wubeibei.leftdoor.view.RouteProgress
-            android:id="@+id/progress"
+        android:layout_height="match_parent"
+        android:id="@+id/path_framelayout">
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/path_image_back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:background="@color/colorPrimaryDark"
-            />
+            android:background="@color/colorPrimaryDark"/>
+        <AbsoluteLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <TextView
+                android:layout_width="700px"
+                android:layout_height="80px"
+                android:id="@+id/text1"
+                android:textColor="@color/textColor"
+                android:gravity="left"
+                android:layout_x="320px"
+                android:layout_y="60px"
+                android:textSize="65px" />
+            <TextView
+                android:layout_width="670px"
+                android:layout_height="80px"
+                android:id="@+id/text2"
+                android:textColor="@color/textColor"
+                android:gravity="center"
+                android:layout_x="439px"
+                android:layout_y="220px"
+                android:textSize="65px" />
+            <TextView
+                android:layout_width="590px"
+                android:layout_height="80px"
+                android:id="@+id/text3"
+                android:gravity="center"
+                android:textColor="@color/textColor"
+                android:layout_x="955px"
+                android:layout_y="60px"
+                android:textSize="65px" />
+            <TextView
+                android:layout_width="555px"
+                android:layout_height="80px"
+                android:id="@+id/text4"
+                android:textColor="@color/textColor"
+                android:gravity="center"
+                android:layout_x="1367px"
+                android:layout_y="220px"
+                android:textSize="65px" />
+        </AbsoluteLayout>
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/textFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/red"
+        android:orientation="vertical">
+        <TextView
+            android:layout_marginTop="20px"
+            android:id="@+id/path_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="SHARING VAN"
+            android:textColor="@android:color/white"
+            android:textSize="230px"
+            android:textStyle="bold" />
     </LinearLayout>
-    <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="上一站"-->
-            <!--android:id="@+id/pre"/>-->
-        <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="下一站"-->
-            <!--android:id="@+id/next"/>-->
-    <!--</LinearLayout>-->
-</LinearLayout>
+</FrameLayout>

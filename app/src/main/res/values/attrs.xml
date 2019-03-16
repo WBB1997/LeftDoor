@@ -35,5 +35,4 @@
         <attr name="NonPassByTextColor" format="color" />
 
     </declare-styleable>
-
 </resources>

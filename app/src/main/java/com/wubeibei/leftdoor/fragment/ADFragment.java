@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.wubeibei.leftdoor.R;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
@@ -63,7 +64,7 @@ public class ADFragment extends Fragment {
      * 改变显示图片
      */
 
-    public void setImge(int res){
+    public void setImge(final int res) {
         GifImageView draweeView = main.findViewById(R.id.ad_imge);
         GifDrawable gifFromResource;
         try {
