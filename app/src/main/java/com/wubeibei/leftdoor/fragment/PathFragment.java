@@ -11,21 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.wubeibei.leftdoor.R;
 import com.wubeibei.leftdoor.util.LogUtil;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
-
-import pl.droidsonroids.gif.GifDrawable;
-import pl.droidsonroids.gif.GifImageView;
 
 public class PathFragment extends Fragment {
     private static final String TAG = "PathFragment";
@@ -85,7 +81,9 @@ public class PathFragment extends Fragment {
         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i < 4 && routeChnName.size() <= 4; i++)
+                for(int i = 0; i < 4; i++)
+                    textViews.get(i).setText("");
+                for (int i = 0; i < 4 && routeChnName.size() >= 4; i++)
                     textViews.get(i).setText(routeChnName.get(i));
             }
         });
@@ -96,6 +94,7 @@ public class PathFragment extends Fragment {
         super.onHiddenChanged(hidden);
         if (!hidden) {
             pathFrame.setAlpha(0);
+            setImge(R.drawable.l4);
             animatorSet = new AnimatorSet();
             ObjectAnimator TextalphaAnimatorIn = ObjectAnimator.ofFloat(textFrame, "alpha", 0.0f, 1f);
             TextalphaAnimatorIn.setDuration(1);
@@ -167,14 +166,8 @@ public class PathFragment extends Fragment {
      * 改变显示图片
      */
 
-    public void setImge(int res){
-        GifImageView draweeView = main.findViewById(R.id.path_image_back);
-        GifDrawable gifFromResource;
-        try {
-            gifFromResource = new GifDrawable(getResources(), res);
-            draweeView.setImageDrawable(gifFromResource);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void setImge(int res) {
+        ImageView imageView = main.findViewById(R.id.path_image_back);
+        Glide.with(PathFragment.this).load(res).into(imageView);
     }
 }

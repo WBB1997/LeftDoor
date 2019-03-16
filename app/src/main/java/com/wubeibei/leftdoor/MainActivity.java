@@ -36,7 +36,7 @@ import javax.xml.parsers.ParserConfigurationException;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private int CurrentDrivingRoadIDNum = 0; //当前行驶路线
-    private int NextStationIDNumb = 1; //下一站点 ID
+    private int NextStationIDNumb = 0; //下一站点 ID
     private final static int MESSAGELENGTH = 1024;  //数据长度
     private ArrayList<ArrayList<Pair<String, String>>> RouteArrayList = new ArrayList<>();
     private FragmentManager fragmentManager;
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                         // 下一个站点ID
                         case LeftDoorCommand.NextStationIDNumb: {
                             data = jsonObject.getIntValue("data");
-                            if (data > RouteArrayList.get(CurrentDrivingRoadIDNum).size() || data < 0)
+                            if (data >= RouteArrayList.get(CurrentDrivingRoadIDNum).size() || data < 0)
                                 break;
                             NextStationIDNumb = data;
                         }
@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
     private void setStationFragment() {
         int size = RouteArrayList.get(CurrentDrivingRoadIDNum).size();
         if(NextStationIDNumb < 0 || NextStationIDNumb >= size) {
-            stationFragment = StationFragment.newInstance(null, null);
+//            stationFragment = StationFragment.newInstance(null, null);
             return;
         }
         if(stationFragment != null) {
@@ -247,6 +247,8 @@ public class MainActivity extends AppCompatActivity {
 
     //替换fragment
     public void replaceFragment(final Fragment fragment) {
+        if(fragment == null)
+            return;
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {

@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/path_framelayout">
-        <pl.droidsonroids.gif.GifImageView
+        <ImageView
             android:id="@+id/path_image_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

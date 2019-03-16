@@ -6,8 +6,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.wubeibei.leftdoor.R;
+import com.wubeibei.leftdoor.util.LogUtil;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -46,16 +49,8 @@ public class ADFragment extends Fragment {
         main = inflater.inflate(R.layout.fragment_ad, container, false);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            // 从view容器中获取组件
-            GifImageView draweeView = main.findViewById(R.id.ad_imge);
-            // 设置默认图片
-            GifDrawable gifFromResource;
-            try {
-                gifFromResource = new GifDrawable(getResources(), getArguments().getInt("picRes"));
-                draweeView.setImageDrawable(gifFromResource);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            ImageView imageView = main.findViewById(R.id.ad_imge);
+            Glide.with(ADFragment.this).load(getArguments().getInt("picRes")).into(imageView);
         }
         return main;
     }
@@ -65,13 +60,7 @@ public class ADFragment extends Fragment {
      */
 
     public void setImge(final int res) {
-        GifImageView draweeView = main.findViewById(R.id.ad_imge);
-        GifDrawable gifFromResource;
-        try {
-            gifFromResource = new GifDrawable(getResources(), res);
-            draweeView.setImageDrawable(gifFromResource);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ImageView imageView = main.findViewById(R.id.ad_imge);
+        Glide.with(ADFragment.this).load(res).into(imageView);
     }
 }
