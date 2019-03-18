@@ -59,15 +59,15 @@
         android:background="@color/red"
         android:orientation="vertical">
         <TextView
-            android:layout_marginTop="20px"
+            android:layout_marginTop="60px"
             android:id="@+id/path_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="SHARING VAN"
+            android:text="欢迎乘坐 SHARING VAN"
             android:textColor="@android:color/white"
-            android:textSize="230px"
+            android:textSize="160px"
             android:textStyle="bold" />
     </LinearLayout>
 </FrameLayout>

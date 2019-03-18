@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wubeibei.leftdoor.fragment.ADFragment;
+import com.wubeibei.leftdoor.fragment.MotionlessFragment;
 import com.wubeibei.leftdoor.fragment.PathFragment;
 import com.wubeibei.leftdoor.fragment.StationFragment;
 import com.wubeibei.leftdoor.res.LeftDoorCommand;
@@ -43,28 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private PathFragment pathFragment;
     private ADFragment adFragment;
     private StationFragment stationFragment;
+    MotionlessFragment motionlessFragment;
     private final int receivePORT = 5556;  // 接收port号
-    private Thread thread = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            try {
-                while (true) {
-                    replaceFragment(adFragment);
-                    MainActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            adFragment.setImge(R.drawable.l1);
-                        }
-                    });
-                    Thread.sleep(3900);
-                    replaceFragment(pathFragment);
-                    Thread.sleep(18000);
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    });
 
 
     @Override
@@ -83,12 +64,13 @@ public class MainActivity extends AppCompatActivity {
             chn.add(RouteArrayList.get(CurrentDrivingRoadIDNum).get(i).first);
         pathFragment = PathFragment.newInstance(chn);
         adFragment = ADFragment.newInstance(R.drawable.l1);
+        motionlessFragment = MotionlessFragment.newInstance(R.drawable.l1);
         // 初始化站点信息
         setStationFragment();
         replaceFragment(pathFragment);
         replaceFragment(stationFragment);
         replaceFragment(adFragment);
-        thread.start();
+        replaceFragment(motionlessFragment);
     }
 
     @Override
@@ -113,14 +95,13 @@ public class MainActivity extends AppCompatActivity {
 
             DatagramPacket datagramPacket;
             // 持续读取命令
+            replaceFragment(motionlessFragment);
             while (true) {
                 byte[] receMsgs = new byte[MESSAGELENGTH];
                 datagramPacket = new DatagramPacket(receMsgs, receMsgs.length);
                 // 读取到命令
                 try {
                     datagramSocket.receive(datagramPacket);
-                    if(thread.isAlive())
-                        thread.interrupt();
                     JSONObject jsonObject = JSONObject.parseObject(new String(receMsgs));
                     LogUtil.d(TAG, jsonObject.toJSONString());
                     int id = jsonObject.getIntValue("id");
@@ -197,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
     private void setStationFragment() {
         int size = RouteArrayList.get(CurrentDrivingRoadIDNum).size();
         if(NextStationIDNumb < 0 || NextStationIDNumb >= size) {
-//            stationFragment = StationFragment.newInstance(null, null);
             return;
         }
         if(stationFragment != null) {
@@ -247,8 +227,6 @@ public class MainActivity extends AppCompatActivity {
 
     //替换fragment
     public void replaceFragment(final Fragment fragment) {
-        if(fragment == null)
-            return;
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -264,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.show(fragment);
                 else
                     fragmentTransaction.add(R.id.fragment_container, fragment);
-                fragmentTransaction.commit();
+                fragmentTransaction.commitAllowingStateLoss();
             }
         });
     }

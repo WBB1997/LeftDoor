@@ -58,7 +58,6 @@ public class StationFragment extends Fragment {
         if(bundle != null) {
             String nowStation = (String) bundle.getSerializable("nowStation");
             String nextStation = (String) bundle.getSerializable("nextStation");
-            LogUtil.d(TAG, nowStation + " " + nextStation);
             setView(nowStation, nextStation);
         }
         return main;
@@ -85,6 +84,9 @@ public class StationFragment extends Fragment {
         super.onHiddenChanged(hidden);
         if(!hidden){
             nextStation.setAlpha(0);
+            nowStation.setAlpha(1);
+            nowStationText.setAlpha(1);
+            nextStationText.setAlpha(1);
             animatorSet = new AnimatorSet();
             // 出现动画
             ObjectAnimator NowalphaAnimatorIn = ObjectAnimator.ofFloat(nowStation, "alpha", 0.0f, 1f);

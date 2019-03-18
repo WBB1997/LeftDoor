@@ -29,6 +29,7 @@ public class PathFragment extends Fragment {
     private TextView pathTextView;
     private LinearLayout textFrame;
     private FrameLayout pathFrame;
+    ImageView imageView;
     private ArrayList<TextView> textViews = new ArrayList<>(4);
     private View main;
     private AnimatorSet animatorSet = new AnimatorSet();
@@ -60,6 +61,7 @@ public class PathFragment extends Fragment {
         textViews.add((TextView) main.findViewById(R.id.text2));
         textViews.add((TextView) main.findViewById(R.id.text3));
         textViews.add((TextView) main.findViewById(R.id.text4));
+        imageView = main.findViewById(R.id.path_image_back);
         setImge(R.drawable.l4);
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -81,7 +83,7 @@ public class PathFragment extends Fragment {
         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                for(int i = 0; i < 4; i++)
+                for (int i = 0; i < 4; i++)
                     textViews.get(i).setText("");
                 for (int i = 0; i < 4 && routeChnName.size() >= 4; i++)
                     textViews.get(i).setText(routeChnName.get(i));
@@ -109,7 +111,7 @@ public class PathFragment extends Fragment {
             animatorSet.play(TextalphaAnimatorIn).with(textViewAlpha);
             animatorSet.play(TextalphaAnimatorOut).after(10000);
             animatorSet.play(PathalphaAnimatorIn).after(TextalphaAnimatorOut);
-            if(textView != null) {
+            if (textView != null) {
                 ObjectAnimator PathTextalphaAnimator = ObjectAnimator.ofFloat(textView, "alpha", 0.0f, 1f);
 //                ObjectAnimator scaleYAnimation = ObjectAnimator.ofFloat(textView, "scaleY", 1f, 1.3f);
 //                ObjectAnimator scaleXAnimation = ObjectAnimator.ofFloat(textView, "scaleX", 1f, 1.3f);
@@ -140,34 +142,37 @@ public class PathFragment extends Fragment {
         }
     }
 
-    public void setNowStation(final int station){
-        if(0 <= station && station < 4) {
+    public void setNowStation(final int station) {
+        if (0 <= station && station < 4) {
             Objects.requireNonNull(this.getActivity()).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     textView = textViews.get(station);
-                    for(int i = 0; i < textViews.size(); i++)
+                    for (int i = 0; i < textViews.size(); i++)
                         textViews.get(i).setTextColor(main.getResources().getColor(R.color.textColor));
                     textView.setTextColor(main.getResources().getColor(R.color.textHighLightColor));
                 }
             });
-        }else {
+        } else {
             Objects.requireNonNull(this.getActivity()).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    for(int i = 0; i < textViews.size(); i++)
+                    for (int i = 0; i < textViews.size(); i++)
                         textViews.get(i).setTextColor(main.getResources().getColor(R.color.textColor));
                 }
             });
             textView = null;
         }
     }
+
     /**
      * 改变显示图片
      */
 
     public void setImge(int res) {
-        ImageView imageView = main.findViewById(R.id.path_image_back);
+        if (imageView == null)
+            imageView = main.findViewById(R.id.path_image_back);
+        imageView.setImageDrawable(null);
         Glide.with(PathFragment.this).load(res).into(imageView);
     }
 }
