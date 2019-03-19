@@ -158,6 +158,16 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         break;
+                        // 切换驾驶模式
+                        case LeftDoorCommand.SystemStatus:{
+                            data = jsonObject.getIntValue("data");
+                            switch (data){
+                                case LeftDoorCommand.Remote:
+                                    replaceFragment(motionlessFragment);
+                                    break;
+                            }
+                        }
+                        break;
                         default:
                             break;
                     }

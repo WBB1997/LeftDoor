@@ -15,8 +15,12 @@ public class LeftDoorCommand {
     public static final int NextStationIDNumb = 64; //下一个站点ID
     public static final int ArrivingSiteRemind = 76;  //到站 或者 启动
 
-    public static final int arrtiving = 1; //ji
+    public static final int arrtiving = 1; //即将到站
     public static final int arrtived = 2; //到站提醒
     public static final int start = 3; // 启动信号
+
+    public static final int SystemStatus = 87;
+    public static final int Auto = 0;
+    public static final int Remote = 2;
 
 }
