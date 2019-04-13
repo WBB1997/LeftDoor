@@ -12,11 +12,6 @@ import com.bumptech.glide.Glide;
 import com.wubeibei.leftdoor.R;
 import com.wubeibei.leftdoor.util.LogUtil;
 
-import java.io.IOException;
-import java.util.Objects;
-
-import pl.droidsonroids.gif.GifDrawable;
-import pl.droidsonroids.gif.GifImageView;
 
 public class ADFragment extends Fragment {
     private static final String TAG = "ADFragment";

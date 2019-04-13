@@ -44,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
     private PathFragment pathFragment;
     private ADFragment adFragment;
     private StationFragment stationFragment;
-    MotionlessFragment motionlessFragment;
+    private MotionlessFragment motionlessFragment;
     private final int receivePORT = 5556;  // 接收port号
+    private boolean isAuto = false;
 
 
     @Override
@@ -163,6 +164,11 @@ public class MainActivity extends AppCompatActivity {
                             data = jsonObject.getIntValue("data");
                             switch (data){
                                 case LeftDoorCommand.Remote:
+                                    isAuto = false;
+                                    replaceFragment(motionlessFragment);
+                                    break;
+                                case LeftDoorCommand.Auto:
+                                    isAuto = true;
                                     replaceFragment(motionlessFragment);
                                     break;
                             }
@@ -216,15 +222,16 @@ public class MainActivity extends AppCompatActivity {
                                 adFragment.setImge(R.drawable.opendoor_left);
                                 replaceFragment(adFragment);
                                 break;
-                            case LeftDoorCommand.openedDoor:
-                                replaceFragment(stationFragment);
-                                break;
                             case LeftDoorCommand.closingDoor:
                                 adFragment.setImge(R.drawable.closedoor_left);
                                 replaceFragment(adFragment);
                                 break;
+                            case LeftDoorCommand.openedDoor:
                             case LeftDoorCommand.closedDoor:
-                                replaceFragment(stationFragment);
+                                if(isAuto)
+                                    replaceFragment(stationFragment);
+                                else
+                                    replaceFragment(motionlessFragment);
                                 break;
                             default:
                                 break;
